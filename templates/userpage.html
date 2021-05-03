@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+<head>
+  <title>Online Forum-Dashbaord</title>
+
+ 
+  <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-app.js"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-analytics.js"></script>
+  
+  </script>
+  <script src="https://www.gstatic.com/firebasejs/ui/4.4.0/firebase-ui-auth.js"></script>
+  <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.4.0/firebase-ui-auth.css" />
+  <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+  <!-- script function to create an editable form for edit post -->
+  <script>
+    function handleEdit() {
+      document.getElementById('subject').disabled = false;
+      document.getElementById('message').disabled = false;
+      document.getElementById('edit').hidden = true;
+      document.getElementById('update').hidden = false;
+
+      return false;
+      }
+  </script>
+
+  <style>
+    div.containerEditPassword {
+        width: 500px;
+        height: 100px;
+        margin: auto;
+        }
+        div.containerEditPost {
+        width: 500px;
+        height: 300px;
+        margin: auto;
+        }
+  </style>
+  </head>
+
+  <body>
+
+    <h3> Welcome to User page!</h3>
+
+    <h4>Post a Message</h4>
+
+    <form action="/updatePassword", method="POST">
+      <p>Old Password:</p>
+      <input  type="password", name="oldpassword", placeholder="Old Password">
+      <p>New Password:</p>
+      <input  type="password", name="newpassword", placeholder="New Password">
+  
+      <button type="submit" , name="submit">Change</button>
+    </form>
+
+    {% for message in get_flashed_messages() %}
+      <p style="color:red">{{ message }}</p>
+      {% endfor %}
+
+    <h4>Edit your Post</h4>
+    <form action="/editPost" , method="POST">          
+        <h5>Posts </h5> 
+      {% for post in postss %}
+        <input type="text" , id=subject , name="subject"   value='{{post.Subject}}' disabled>
+        <input type="text", id= message , name="message"  value='{{post.Message}}' disabled>
+        {{post.TimeStamp}}
+        <button id=edit , onclick=" return handleEdit()">Edit</button>
+        <button type="submit" , id="update" >Update</button>
+      <h1>~~~~~~~~~~~~~~~~</h1>
+      {% endfor %}
+      </form>
+
+      
+
+  </body>
+
+
+
+  </html>

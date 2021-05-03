@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+<head>
+  <title>Online Forum-Dashbaord</title>
+
+ 
+  <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-app.js"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-analytics.js"></script>
+  
+  </script>
+  <script src="https://www.gstatic.com/firebasejs/ui/4.4.0/firebase-ui-auth.js"></script>
+  <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.4.0/firebase-ui-auth.css" />
+  <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+  <style>
+    div.containerHeading {
+      width: 600px;
+      height: 100px;
+      margin: auto;
+    }
+    div.containerBody {
+      width: 600px;
+      height: 100px;
+      margin: auto;
+    }
+    input.messageBox{
+      height: 100px;
+      width: 350px;
+      margin-left: 18%;
+    }
+    input.subjectBox{
+      height: 30px;
+      width:  350px;
+      margin-left: 10%;
+    }
+</style>    
+
+</head>
+<body>
+
+<h4>Welcome to your Dashboard</h4>
+<div class="containerHeading">
+  <button style="float: right"><a href="{{ url_for('logout') }}">Logout</a></button>
+
+  <h3 style="float: left" class="UserName">Greetings <a href="{{ url_for('userPage') }}">{{usernname}}</a></h3>
+</div>
+
+<div class="containerBody">
+
+  <h4>Post a Message</h4>
+
+    <form action="/postBlog", method="POST">
+      <p>Subject:</p>
+      <input class ="subjectBox" type="subject", name="subject", placeholder="subject">
+      <p>Message:</p>
+      <input class ="messageBox" type="message", name="message", placeholder="message">
+      
+
+      <button type="submit" , name="submit">Post</button>
+    </form>
+
+    <h5>Posts</h5>
+  <dd>
+    {% for post in postss %}
+      <h3>Poster</h3>
+       <p>{{post.UserName}}</p>
+      <h3>Subject</h3>
+       <p>{{post.Subject}}</p>
+      <h3>Message</h3>
+          <p>{{post.Message}}</p>
+      <h3>Time:</h3>
+       <p>{{post.TimeStamp}}</p>
+      <h1>~~~~~~~~~~~~~~~~</h1>
+    {% endfor %}
+  </dd>
+</div>
+
+</body>
+</html>

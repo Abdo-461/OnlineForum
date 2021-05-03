@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<head>
+  <title>Online Forum</title>
+
+ 
+  <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-app.js"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-analytics.js"></script>
+  
+  </script>
+  <script src="https://www.gstatic.com/firebasejs/ui/4.4.0/firebase-ui-auth.js"></script>
+  <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.4.0/firebase-ui-auth.css" />
+  <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<h4>Welcome to the Online Forum where you can share your insights and ideas!</h4>
+<h5> Please Log In</h5>
+
+<p>Dont have an account? <a href="/register">Sign up now!</a></p>
+
+<div id="firebaseui-auth-container"></div>
+
+<!-- log-in form -->
+<div>
+  <form action="/", method="POST">
+
+    <input type="UserId", name="UserId", placeholder="UserId">
+    <input type="password", name="password", placeholder="password">
+
+    <button type="submit" , name="submit">Sign In</button>
+  </form>
+</div>
+
+  {% for message in get_flashed_messages() %}
+      <p style="color:red">{{ message }}</p>
+      {% endfor %}
+
+</body>
+</html>
